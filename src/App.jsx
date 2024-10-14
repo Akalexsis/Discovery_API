@@ -1,50 +1,81 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
-import artistInfo from './components/practice';
-import Artist from './components/Artist';
+import Playlist from './components/Playlist';
 
-// access token needed to access Spotify API
-// const accessToken = ''
-// // Spotify API endpoint
-// const apiURL = ''
 
-// const getArtist = async () => {
-//   const response = await fetch(apiURL);
-//   const data = await response.json;
-//   console.log(data);
-// }
+ // gets authorization for API requests
+ async function getAuth() {
+  // endpoint to grant access to Spotify endpoints
+  const accessURL = 'https://accounts.spotify.com/api/token'
+  // client credentials to access API
+  const cid = 'abcdefg';
+  const csecret = 'abcdefg'
 
-console.log(artistInfo)
+  // put all info together to make POST request for authentication
+  const access = {
+    method: 'POST', 
+    // headers provided by Spotify API
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded', 
+    }, 
+    // URLSearchParams encodes data and builds request from access tokens
+    body: new URLSearchParams({
+        grant_type: 'client_credentials',
+        client_id: cid,
+        client_secret: csecret
+      })
+    }
+
+  // Spotify API that grants authorization
+  const response = await fetch(accessURL, access);
+  const authData = await response.json();
+  console.log(authData);
+  return authData;
+}
+console.log(getAuth())
+
 function App() {
+  const apiAuth = getAuth()
   // // access token needed to access Spotify API
   // const apiKEY = ''
-  // // Spotify API endpoint
-  // const apiURL = ''
 
-  // const getArtist = async () => {
-  //   const response = await fetch(apiURL);
+
+
+ 
+  // // makes API call to Spotify
+  // const getPlaylist = async () => {
+  //   // Spotify API endpoint to rnb playlists
+  //   // const apiURL = 'https://api.spotify.com/v1/search?q=rnb&type=playlist&limit=25'
+  // need authorization to access info from endpoint
+    // const response = await fetch(apiURL, {
+    //   method: 'GET',
+    //   headers: { 'Authorization': `Bearer ${access}`} });
   //   const data = await response.json;
   //   console.log(data);
+
+  //   // all information returned in object items
+  //   const [currentPlaylist, setCurrentPlaylist] = useState(data[items]);
   // }
 
-  // holds value of current artist displayed on screen
-  const [currentArtist, setCurrentArtist] = useState(null);
-  // indexes JSON doc to get the next artist
+  // holds value of current playlist displayed on screen
+  const [currentPlaylist, setCurrentPlaylist] = useState(null);
+  // indexes JSON doc to get the next playlist
   const [index, setIndex] = useState(0);
 
-  // funciton displays next artist in API doc
-  const onNextArtist = () => {
+  // funciton displays next playlist in API doc
+  const onNextPlaylist = () => {
     try {
-      // if (index <= artistInfo.length) {
+      // if (index <= playlistInfo.length) {
         // holds value of index when bttn clicked
+        useEffect(() => {getPlaylist()}, [])
         let currentIndex = index;
-        // artist at currentIndex
-        setCurrentArtist(artistInfo[currentIndex]);
+        // playlist at currentIndex
+        // setCurrentPlaylist(artistInfo[currentIndex]);
         setIndex(index+1);
       // } 
       // // atp can only reset once users looked at them all 
       // else {
-      //   // resets index and shows artist at index
+      //   // resets index and shows playlist at index
       //   setIndex(0)
       // }
     } catch (error) {
@@ -52,19 +83,19 @@ function App() {
     }
   }
 
-  console.log(`Artist at index ${index} is ${artistInfo[index].name}`);
-  console.log(`Current artist ${currentArtist}`)
+  // console.log(`Playlist at index ${index} is ${artistInfo[index].name}`);
+  console.log(`Current playlist ${currentPlaylist}`)
 
   return (
     <div className='App'>
       <header>
         <h1>World of RnB</h1>
-        <p>Hello there! Interested in finding RnB artists? Well this site is just for you! Here, you can find information
-          on any artist in this genre. Click the 'Next Artist' button to find a new artist!
+        <p>Hello there! Interested in discovering new RnB playlists? Well this site is just for you! Here, you can find 
+          many playlists within this genre that can be found on Spotify. Click the 'Next Playlist' button to start browsing!
         </p>
       </header>
-      { currentArtist === null ? (<h1>Artists will appear here</h1>) : ( <Artist artistShown={currentArtist}/> ) }
-      <button onClick={onNextArtist}>Next Artist</button>
+      { currentPlaylist === null ? (<h1>Playlists will appear here</h1>) : ( <Playlist playlistShown={currentPlaylist}/> ) }
+      <button onClick={onNextPlaylist}>Next Playlist</button>
     </div>
   )
 }
