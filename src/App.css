@@ -1,7 +1,23 @@
+/* holds the App component in main.jsx */
 #root {
   max-width: 1280px;
-  margin: 0 auto;
+  margin: auto auto;
   padding: 2rem;
+  height: 500px;
   text-align: center;
+  /* want background color to utilize linear-gradient for background */
+  background-color: rgb(0,0,0);
+  font-size: 16px;
 }
 
+.App {
+  color: white;
+}
+
+header h1 {
+  font-size: 3rem;
+}
+
+header p {
+  font-size: 1.125rem;
+}

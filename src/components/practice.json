@@ -1,0 +1,22 @@
+[
+    {
+      "name": "Giveon",
+      "albums": 3,
+      "img": "image of Giveon"
+    },
+    {
+      "name": "Sza",
+      "albums": 5,
+      "img": "image of Sza"
+    },
+    {
+      "name": "Ella Mai",
+      "albums": 2,
+      "img": "image of Ella Mai"
+    },
+    {
+      "name": "Daniel Ceaser",
+      "albums": 1,
+      "img": "image of Daniel Ceaser"
+    }
+  ]
