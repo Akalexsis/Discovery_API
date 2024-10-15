@@ -1,54 +1,58 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import Playlist from './components/Playlist';
-import getAuth from './components/AuthToken';
+// import getAuth from './components/AuthToken';
 
 function App() {
   
-  // holds value of current playlist displayed on screen
-  const [currentPlaylist, setCurrentPlaylist] = useState(null);
+  // displays playlist name
+  const [playlistName, setPlaylistName] = useState(null);
+  // displays playlist total tracks in playlist
+  const [playlistTracks, setPlaylistTracks] = useState(null);
+  // displays playlist image
+  const [playlistImg, setPlaylistImg] = useState(null);
+  // displays playlist owner
+  const [playlistOwner, setPlaylistOwner] = useState(null);
   // indexes JSON doc to get the next playlist
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(5);
 
-  // only makes one API call to get playlists
-    const getPlaylist = async () => {
-    // gets authorization token for API request
-    const apiAuth = "abcdefg";
-    console.log(`My API access ${apiAuth}`)
-    // Spotify API endpoint to rnb playlists
-    const apiURL = 'https://api.spotify.com/v1/search?q=genre%3AR%26b&type=playlist&limit=25'
-    // need authorization to access info from endpoint
-    const response = await fetch(apiURL, {
-      method: 'GET',
-      // grants access to playlist endpoint
-      headers: { 'Authorization': `Bearer ${apiAuth}`} });
-    const data = await response.json();
-    
-    // .playlist.items get information from API about each playlist
-    console.log(data.playlists.items);
-  }
-  
-  // console.log(getPlaylist())
-  // funciton displays next playlist in API doc
-  const onNextPlaylist = () => {
+  // funciton displays next playlist in API 
+  const onNextPlaylist = async () => {
     try {
-        let currentIndex = index;
-        // playlist at currentIndex
-        setCurrentPlaylist(playlistData[currentIndex]);
-        setIndex(index+1);
-      // } 
-      // // atp can only reset once users looked at them all 
-      // else {
-      //   // resets index and shows playlist at index
+      // if (index == 25) {
+      //   // resets index once all playlists have been displayed
       //   setIndex(0)
-      // }
+      // } else {
+        let currentIndex = index;
+        // gets authorization token for API request
+        const apiAuth = "abcdefg";
+        console.log(`My API access ${apiAuth}`)
+        // Spotify API endpoint to rnb playlists
+        const apiURL = 'https://api.spotify.com/v1/search?q=genre%3AR%26b&type=playlist&limit=25'
+        // need authorization to access info from endpoint
+        const response = await fetch(apiURL, {
+          method: 'GET',
+          // grants access to playlist endpoint
+          headers: { 'Authorization': `Bearer ${apiAuth}`} });
+        const data = await response.json();
+        
+        // .playlist.items get information from API about each playlist
+        console.log(data.playlists.items);
+        // return data.playlists.items
+        setPlaylistName(data.playlists.items[currentIndex].name);
+        setPlaylistTracks(data.playlists.items[currentIndex].tracks.total);
+        setPlaylistOwner(data.playlists.items[currentIndex].owner.display_name);
+        setPlaylistImg(data.playlists.items[currentIndex].images[0].url);
+        
+        // updates index value on next click
+        setIndex(index+1);
+
     } catch (error) {
       console.log(error)
     }
   }
 
-  // console.log(`Playlist at index ${index} is ${artistInfo[index].name}`);
-  console.log(`Current playlist ${getPlaylist()}`)
+  console.log(onNextPlaylist())
 
   return (
     <div className='App'>
@@ -58,8 +62,11 @@ function App() {
           many playlists within this genre that can be found on Spotify. Click the 'Next Playlist' button to start browsing!
         </p>
       </header>
-      { currentPlaylist === null ? (<h1>Playlists will appear here</h1>) : ( <Playlist playlistShown={currentPlaylist}/> ) }
-      <button onClick={onNextPlaylist}>Next Playlist</button>
+      <div>
+        { playlistName === null ? (<h1>Playlists will appear here</h1>) : ( <Playlist name={playlistName} owner={playlistOwner} track={playlistTracks} image={playlistImg} /> ) }
+        <button onClick={onNextPlaylist}>Next Playlist</button>
+      </div>
+      
     </div>
   )
 }

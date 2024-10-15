@@ -4,7 +4,7 @@ Submitted by: **Kayla Thornton**
 
 This web app: **insert description**
 
-Time spent: **X** hours spent in total
+Time spent: **8-10** hours spent in total
 
 ## Required Features
 
@@ -12,8 +12,8 @@ The following **required** functionality is completed:
 
 - [ ] **Clicking a button creates a new API fetch request and displays at least three attributes from the returned JSON data**
 - [ ] **Only one item/API call is viewable at a time**
-- [ ] **API calls appear random to the user**
-- [ ] **At least one image is displayed per API call**
+- [x] **API calls appear random to the user**
+- [x] **At least one image is displayed per API call**
 - [ ] **Clicking on a displayed value for one attribute adds it to a displayed ban list**
   - [ ] To ensure an accurate grade, your recording **must** show that when clicked, an attribute in the ban list is immediately removed from the list of banned attributes
 - [ ] **Attributes on the ban list prevent further images/API results with that attribute from being displayed**
@@ -25,7 +25,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you added to improve the site's functionality!
+* No additional features are added
 
 ## Video Walkthrough
 
@@ -38,6 +38,15 @@ GIF created with Zoom
 ## Notes
 
 Describe any challenges encountered while building the app.
+- I had no idea how to find an API endpoint
+  - In class, we discussed how to use an API, but not how to find it and how to read documentation for it, so I had to learn this
+  before I could use it in my project
+- Did not know how to work Spotify API
+    - Needed to use a post to gain access to spotify WEB API but I don’t know how to write a post command yet
+    - Research on YouTube and asked ChatGPT how to convert a curl request (shown in the Spotify documentation) into a fetch requst
+     (a request I know how to make)
+- Difficulties getting only one API request to show at a time
+  - I knew useEffect would solve this issue, but I was unsure how to use it within an onClick function
 
 ## License
 

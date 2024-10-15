@@ -1,17 +1,15 @@
 import React from "react";
 
-const Artist = ({playlistShown}) => {
-    console.log(`Component: ${playlistShown}`)
+const Artist = ({name, owner, track, image}) => {
+    console.log(`Component: ${name}`)
     // ternary operator for conditional rendering
     
     return (
         <div className="playlist-info">
-            <h1>Name of Playlist: {playlistShown.name}</h1>
-            <h3>Number of tracks: {playlistShown}</h3>
-            <h3>Playlist creater name</h3>
-            <h6>**playlist cover will appear here**</h6>
-            {/* <img src="" alt="" /> */}
-            {/* <p>**description of the playlist will be shown here** {playlistShown.description}</p> */}
+            <h1>Playlist: <span id='underline'>{name}</span> by {owner}</h1>
+            <h3>Playlist cover</h3>
+            <img src={image} alt={`Image of ${name} playlist`} width='250' />
+            <p>Total tracks: {track}</p>
         </div>
     ) 
 }
