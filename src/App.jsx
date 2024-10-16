@@ -24,32 +24,30 @@ function App() {
   // makes API call to store playlist data in var playlistData
   const getPlaylist = async () => {
     // gets authorization token for API request
-    const apiAuth = "BQBDm0MvIqWP7y6SqionnJSKNDy3Vjzf82SJggmPE6QOT4YkEb65LhJKZXf-TOV0dW1-d1dfCzmDl9YQGeW77DOt4crgJCmhLr9B3SJNWM0AJoKV7ck";
+    const apiAuth = "BQAaUytC4xvQav0mHTzTvQHwwbxbzC_yOV55tM_ahBosEqDKW_ohbqE-NdL_ANWwkaj8L0BSvMkOtAidUzgwE9VAeRZ8bTLQuTwaob39JXBmaLziTck";
     console.log(`My API access ${apiAuth}`)
 
     // Spotify API endpoint to rnb playlists
-    const apiURL = 'https://api.spotify.com/v1/search?q=genre%3AR%26b&type=playlist&limit=25'
+    const apiURL = 'https://api.spotify.com/v1/search?q=genre%3AR%26b&type=playlist&limit=50'
     // need authorization to access info from endpoint
     const response = await fetch(apiURL, {
       method: 'GET',
       // grants access to playlist endpoint
-      headers: { 'Authorization': `Bearer ${apiAuth}`} }).then((response) => {
-        response.json().then((data) => {
-          setPlaylistData(data.playlists.items)
-          
-        })
-      });
+      headers: { 'Authorization': `Bearer ${apiAuth}`} })
+    
+    const data = await response.json();
+    // saves all playlists from API into variable
+    setPlaylistData(data.playlists.items);
   }
   
   // makes API call to store data in playlistData
   useEffect(() => {getPlaylist()}, [])
   console.log(playlistData)
-  // console.log(`playlists ${JSON.stringify(playlistData)}`)
 
   const onNextPlaylist = () => {
     try {
       let currentIndex = index;
-      if (index == 25) {
+      if (index == playlistData.length) {
         // resets index once all playlists have been displayed
         setIndex(0)
       } else {

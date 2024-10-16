@@ -4,14 +4,14 @@ Submitted by: **Kayla Thornton**
 
 This web app: **insert description**
 
-Time spent: **8-10** hours spent in total
+Time spent: **10** hours spent in total
 
 ## Required Features
 
 The following **required** functionality is completed:
 
-- [ ] **Clicking a button creates a new API fetch request and displays at least three attributes from the returned JSON data**
-- [ ] **Only one item/API call is viewable at a time**
+- [x] **Clicking a button creates a new API fetch request and displays at least three attributes from the returned JSON data**
+- [x] **Only one item/API call is viewable at a time**
 - [x] **API calls appear random to the user**
 - [x] **At least one image is displayed per API call**
 - [ ] **Clicking on a displayed value for one attribute adds it to a displayed ban list**
@@ -31,7 +31,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<a href="">Walkthrough Video</a>
+<a href="https://www.dropbox.com/scl/fi/pdqngzgdevwviiwprd3iv/K_Thornton_WEB102_Week4.mp4?rlkey=bd0zph0u2dkb2tiivye25g18b&st=mdnsoiyc&dl=0">Walkthrough Video</a>
 
 GIF created with Zoom 
 
@@ -46,7 +46,8 @@ Describe any challenges encountered while building the app.
     - Research on YouTube and asked ChatGPT how to convert a curl request (shown in the Spotify documentation) into a fetch requst
      (a request I know how to make)
 - Difficulties getting only one API request to show at a time
-  - I knew useEffect would solve this issue, but I was unsure how to use it within an onClick function
+  - I knew useEffect would solve this issue, but I was unsure how to use it with an onClick function
+  - Realized I needed to separate the onClick functionality from the API call and call the API within useEffect
 
 ## License
 

@@ -3,8 +3,8 @@
     // endpoint to grant access to Spotify endpoints
     const accessURL = 'https://accounts.spotify.com/api/token'
     // client credentials to access API
-    const cid = 'abcdefg';
-    const csecret = 'abcdefg';
+    const cid = '85f0549218c24ed28e354abf37dc9095';
+    const csecret = 'c104e775771647579e44efe7adaccddc';
 
     // put all info together to make POST request for authentication
     const access = {
