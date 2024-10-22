@@ -2,7 +2,9 @@
 
 Submitted by: **Kayla Thornton**
 
-This web app: **insert description**
+This web app uses Spotify's API to render information on RnB playlists. Users can click the "Next Playlist" button to discover 
+a new playlist recommendation. When the button is clicked, the playlist name, it's owner, and the total number of tracks in the 
+playlist. The playlist's cover image is also shown.
 
 Time spent: **10** hours spent in total
 
